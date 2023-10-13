@@ -68,7 +68,7 @@ const ProjectForm =  ({type, session}: Props) => {
     };
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col items-center justify-start w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto">
-        <div className="flex items-center justify-start w-full lg:min-h-[400px] min-h-[200px] relative">
+        <div className=" lg:min-h-[400px] min-h-[200px] relative">
             <label htmlFor="poster" 
             className="z-10 flex items-center justify-center text-center w-full h-full p-20 border-2 border-gray-200 border-dashed"
             >
@@ -141,7 +141,7 @@ const ProjectForm =  ({type, session}: Props) => {
              type="submit"
              leftIcon={isSubmitting ? "" : "/plus.svg"}
              isSubmitting={isSubmitting}
-             >Create</Button>
+             ></Button>
         </div>
     </form>
   )
