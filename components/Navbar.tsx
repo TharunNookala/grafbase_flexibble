@@ -1,16 +1,23 @@
 import { NavLinks } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import AuthProviders from './AuthProviders'
+import { getCurrentUser } from '@/lib/session'
+import { signOut } from 'next-auth/react'
+import ProfileMenu from './ProfileMenu'
 
-const Navbar = () => {
+const Navbar = async () => {
+  // const session = await getCurrentUser();
   const session = {};
   return (
     <nav className='flex items-center justify-between py-5 px-8 border-b border-[#EBEAEA] gap-4 '>
         <div className='flex flex-1 items-center justify-start gap-10'>
         <Link href='/'>
-            <Image src='/logo.svg' width={115} height={43} alt='Flexxible' />
+            <Image 
+            src='/logo.svg' 
+            width={115} 
+            height={43} 
+            alt='Flexxible' />
         </Link>
         <ul className='hidden xl:flex text-sm font-medium gap-7'>
             {
@@ -23,16 +30,16 @@ const Navbar = () => {
         </ul>
         </div>
         <div className='flex items-center justify-center gap-4'>
-            {
-              session ? (
+            {session ? (
                 <>
-                UserPhoto
+                {/* <ProfileMenu session={session}/> */}
                 <Link href="/create-project">
                   Share Work
                 </Link>
                 </>
               ) : (
-                <AuthProviders />
+                // <AuthProviders />
+                null
               )
             }
         </div>
