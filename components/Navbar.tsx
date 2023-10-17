@@ -5,10 +5,10 @@ import AuthProviders from './AuthProviders'
 import { getCurrentUser } from '@/lib/session'
 import { signOut } from 'next-auth/react'
 import ProfileMenu from './ProfileMenu'
+import Button from './Button'
 
 const Navbar = async () => {
-  // const session = await getCurrentUser();
-  const session = {};
+  const session = await getCurrentUser();
   return (
     <nav className='flex items-center justify-between py-5 px-8 border-b border-[#EBEAEA] gap-4 '>
         <div className='flex flex-1 items-center justify-start gap-10'>
@@ -30,16 +30,15 @@ const Navbar = async () => {
         </ul>
         </div>
         <div className='flex items-center justify-center gap-4'>
-            {session ? (
+            {session?.user ? (
                 <>
-                {/* <ProfileMenu session={session}/> */}
+                <ProfileMenu session={session}/>
                 <Link href="/create-project">
-                  Share Work
+                <Button title='Share work' />
                 </Link>
                 </>
               ) : (
-                // <AuthProviders />
-                null
+                <AuthProviders />
               )
             }
         </div>

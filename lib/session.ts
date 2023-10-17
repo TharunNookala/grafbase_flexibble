@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
             const encodedtoken = jsonwebtoken.sign({
                 ...token,
                 iss: 'grafbase',
-                exp: Math.floor(Date.now() / 1000 + 60 * 60 )
+                exp: Math.floor(Date.now() / 1000) + 60 * 60
             }, secret)
             return encodedtoken;
         },
@@ -30,11 +30,12 @@ export const authOptions: NextAuthOptions = {
     },
     theme : {
         colorScheme : 'light',
-        logo: '/logo.png'
+        logo: '/logo.svg'
     },
     callbacks: {
         async session({session}){
             const email = session?.user?.email as string;
+            console.log("session :", session)
             
             try{
                 const data = await getUser(email) as {user?: UserProfile}
@@ -47,7 +48,7 @@ export const authOptions: NextAuthOptions = {
                 }
                 return newSession;
             } catch(error:any){
-                console.log("Error retrieving user data: " + error)
+                console.log("Error retrieving user data: " + error.message)
                 return session;
             }  
         },
@@ -60,7 +61,7 @@ export const authOptions: NextAuthOptions = {
                 }
                     return true;
             } catch(err: any){
-                console.log(err);
+                console.log("Error checking if user exists: ", err.message);
                 return false;
             }
         }

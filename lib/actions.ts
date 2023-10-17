@@ -5,7 +5,7 @@ import { ProjectForm } from '@/common.types';
 const isProduction = process.env.NODE_ENV === 'production';
 const apiUrl = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || '': 'https://127.0.0.1:4000/graphql';
 const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '': 'letmein';
-const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL || '': 'https://localhost:3000';
+const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL :  'http://localhost:3000';
 const client = new GraphQLClient(apiUrl)
 
 const makeGraphQLRequest = async (query: string, variables={}) => {
@@ -48,7 +48,7 @@ export const uploadImage = async (imagePath: string) => {
         return response.json();
     } catch (error) {
         throw error;
-    }
+    } 
 };
 
 export const createNewProject = async (form : ProjectForm, creatorId : string, token: string) => {
@@ -57,11 +57,13 @@ export const createNewProject = async (form : ProjectForm, creatorId : string, t
         if(imageUrl.url){
             client.setHeader("Authorization",`Bearer ${token}`)
             const variables = {
+              input: { 
                 ...form,
                 image: imageUrl.url,
                 createdBy:{
                     link: creatorId
                 }
+              }
             }
             return makeGraphQLRequest(createProjectMutation, variables)
         }

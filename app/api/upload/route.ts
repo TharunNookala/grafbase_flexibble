@@ -3,9 +3,9 @@ import {v2 as cloudinary} from "cloudinary";
 
 
 cloudinary.config({ 
-  cloud_name: process.env.CLOUDINRAY_NAME, 
-  api_key: process.env.CLOUDINRAY_KEY, 
-  api_secret: process.env.CLOUDINRAY_SECRET,
+  cloud_name: process.env.CLOUDINARY_NAME, 
+  api_key: process.env.CLOUDINARY_KEY, 
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 export async function POST(request: Request){
@@ -30,6 +30,6 @@ export async function POST(request: Request){
         const result = await cloudinary.uploader.upload(path, options);  
         return NextResponse.json(result, {status:200});
     } catch (error) {
-        return NextResponse.json({message:error}, {status:500});     
+        return NextResponse.json({message:"Failed to upload image on Cloudinary"}, {status:500});     
     }
 }
