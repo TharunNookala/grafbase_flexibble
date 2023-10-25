@@ -35,7 +35,6 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async session({session}){
             const email = session?.user?.email as string;
-            console.log("session :", session)
             
             try{
                 const data = await getUser(email) as {user?: UserProfile}
@@ -54,10 +53,9 @@ export const authOptions: NextAuthOptions = {
         },
         async signIn({user}: {user: AdapterUser | User}){
             try{
-                const userExists = await getUser(user?.email as string) as {user?: UserProfile}
-                
-                if(!userExists) {
-                    await createUser(user.name as string, user.email as string, user.image as string)
+                const userExists = await getUser(user?.email as string) as {user?: UserProfile}                
+                if(userExists) {
+                    await createUser(user?.name as string, user?.email as string, user?.image as string);
                 }
                     return true;
             } catch(err: any){

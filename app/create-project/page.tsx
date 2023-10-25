@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const CreateProject = async () => {
     const session = await getCurrentUser();
 
-    // if(!session?.user) redirect('/')
+    if(!session?.user) redirect('/')
   return (
     <Modal>
         <h3 className="md:text-5xl text-3xl font-extrabold text-left max-w-5xl w-full">Create a new project</h3>
