@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import FooterColumn from '@/components/FooterColumn'
-import { footerLinks } from '@/constants'
+import { footerLinks } from '@/constant'
 
 const Footer = () => {
   return (

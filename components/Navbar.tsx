@@ -1,9 +1,8 @@
-import { NavLinks } from '@/constants'
+import { NavLinks } from '@/constant'
 import Image from 'next/image'
 import Link from 'next/link'
 import AuthProviders from './AuthProviders'
 import { getCurrentUser } from '@/lib/session'
-import { signOut } from 'next-auth/react'
 import ProfileMenu from './ProfileMenu'
 import Button from './Button'
 
