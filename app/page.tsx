@@ -23,7 +23,7 @@ type ProjectSearch = {
     }
   }
 }
-const Home = async ({ searchParams: { category='', endcursor } }: Props) => {
+const Home = async ({ searchParams: { category='Frontend', endcursor } }: Props) => {
   const data = await fetchAllProjects(category) as ProjectSearch;
   const projectsToDisplay = data?.projectSearch?.edges || [];
   if(projectsToDisplay.length === 0){
@@ -35,7 +35,7 @@ const Home = async ({ searchParams: { category='', endcursor } }: Props) => {
     )
   }
   return (
-    <section className="flex-start flex-col lg:px-20 py-6 px-5 border-[12px]">
+    <section className="flex-start flex-col lg:px-20 py-6 px-5 border-t-[12px] border-b-[3px]">
       <Categories />
 
         <section className="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full">

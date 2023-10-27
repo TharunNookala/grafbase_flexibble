@@ -63,8 +63,7 @@ export const authOptions: NextAuthOptions = {
                 return false;
             }
         }
-    },
-    secret: process.env.NEXT_PUBLIC_SECRET
+    }
 }
 
 export async function getCurrentUser(){
