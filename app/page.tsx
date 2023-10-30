@@ -1,5 +1,6 @@
 import { ProjectInterface } from "@/common.types"
 import Categories from "@/components/Categories";
+import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions"
 
@@ -23,8 +24,8 @@ type ProjectSearch = {
     }
   }
 }
-const Home = async ({ searchParams: { category='Frontend', endcursor } }: Props) => {
-  const data = await fetchAllProjects(category) as ProjectSearch;
+const Home = async ({ searchParams: { category="", endcursor } }: Props) => {
+  const data = await fetchAllProjects(category, endcursor) as ProjectSearch;
   const projectsToDisplay = data?.projectSearch?.edges || [];
   if(projectsToDisplay.length === 0){
     return (
@@ -34,6 +35,7 @@ const Home = async ({ searchParams: { category='Frontend', endcursor } }: Props)
       </section>
     )
   }
+  const pagination = data?.projectSearch?.pageInfo;
   return (
     <section className="flex-start flex-col lg:px-20 py-6 px-5 border-t-[12px] border-b-[3px]">
       <Categories />
@@ -51,7 +53,12 @@ const Home = async ({ searchParams: { category='Frontend', endcursor } }: Props)
             />
           ))}
         </section>
-      <h1>LoadMore</h1>
+      <LoadMore 
+      startCursor={pagination.startCursor}
+      endCursor={pagination.endCursor}
+      hasPreviousPage={pagination.hasPreviousPage}
+      hasNextPage={pagination.hasNextPage}
+      />
     </section>
   )
 }
