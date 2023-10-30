@@ -54,10 +54,16 @@ export const authOptions: NextAuthOptions = {
         async signIn({user}: {user: AdapterUser | User}){
             try{
                 const userExists = await getUser(user?.email as string) as {user?: UserProfile}                
-                if(!userExists) {
-                    await createUser(user?.name as string, user?.email as string, user?.image as string);
-                }
+                // if(!userExists) {
+                //     await createUser(user?.name as string, user?.email as string, user?.image as string);
+                // }
+                //     return true;
+                if (userExists) {
                     return true;
+                } else {
+                    await createUser(user?.name as string, user?.email as string, user?.image as string);
+                    return true;
+                }
             } catch(err: any){
                 console.log("Error checking if user exists: ", err.message);
                 return false;
