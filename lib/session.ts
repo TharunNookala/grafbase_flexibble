@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
         async signIn({user}: {user: AdapterUser | User}){
             try{
                 const userExists = await getUser(user?.email as string) as {user?: UserProfile}                
-                if(!userExists) {
+                if(userExists) {
                     await createUser(user?.name as string, user?.email as string, user?.image as string);
                 }
                     return true;
